@@ -18,9 +18,10 @@ export default class PostHandler {
         }
         const body: PostModel = validation.value;
         const service = ServiceLocator.addPostService;
-        try{
-            await service.addCategory(body);
-        }catch(err){
+        try {
+            await service.addPost(body);
+            res.status(201).send({success: true});
+        } catch (err) {
             const errorRes = errorResponse(err);
             res.status(errorRes.code).send(errorRes.message);
         }

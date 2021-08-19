@@ -7,7 +7,7 @@ export default class PostService{
         public postDAO:PostDao
     ) {
     }
-    async addCategory(post: PostModel): Promise<PostDocument> {
+    async addPost(post: PostModel): Promise<PostDocument> {
         return this.postDAO.add(post);
     }
 }
