@@ -1,20 +1,27 @@
 import * as mongoose from 'mongoose';
 import PostModel from "../models/postModel";
 import DbUtil from "../utill/dbUtil";
-import { Document } from "mongoose";
+import {Document} from "mongoose";
 
 export interface PostDocument extends PostModel, Document {
 }
 
 const postSchema = new mongoose.Schema({
     accelerometerX: {
-        type: String
+        type: String,
+        required: false
     },
     accelerometerY: {
-        type: String
+        type: String,
+        required: false
     },
     accelerometerZ: {
-        type: String
+        type: String,
+        required: false
+    },
+    proximity: {
+        type: String,
+        required: false
     },
     date: {
         type: Date,

@@ -10,4 +10,8 @@ export default class PostService{
     async addPost(post: PostModel): Promise<PostDocument> {
         return this.postDAO.add(post);
     }
+
+    async getPosts(): Promise<PostDocument[]> {
+        return this.postDAO.getAllPosts();
+    }
 }

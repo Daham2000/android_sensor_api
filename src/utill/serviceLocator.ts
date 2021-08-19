@@ -5,7 +5,7 @@ export default class ServiceLocator {
 
     private static readonly instances: Map<string, any> = new Map<string, any>();
 
-    static get categoryDao(): PostDao {
+    static get postDao(): PostDao {
         const key = "category_dao";
         if (!this.instances.get(key)) {
             this.instances.set(key, new PostDao());
@@ -18,7 +18,18 @@ export default class ServiceLocator {
         if (!this.instances.get(key)) {
             this.instances.set(
                 key,
-                new AddPostService(this.categoryDao)
+                new AddPostService(this.postDao)
+            );
+        }
+        return this.instances.get(key);
+    }
+
+    static get getPostsService(): AddPostService {
+        const key = "get_posts_service";
+        if (!this.instances.get(key)) {
+            this.instances.set(
+                key,
+                new AddPostService(this.postDao)
             );
         }
         return this.instances.get(key);
