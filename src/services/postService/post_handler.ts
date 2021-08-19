@@ -1,9 +1,11 @@
 import {Request, Response} from "express";
 import Joi = require("joi");
 import PostModel from "../../models/postModel";
+import ServiceLocator from "../../utill/serviceLocator";
+import {errorResponse} from "../../utill/response";
 
-export default class AddPostHandler {
-    public static async AddPost(req: Request, res: Response): Promise<void> {
+export default class PostHandler {
+    public static async addPost(req: Request, res: Response): Promise<void> {
         const schema = Joi.object({
             accelerometerX: Joi.string().required(),
             accelerometerY: Joi.string().required(),
@@ -15,7 +17,13 @@ export default class AddPostHandler {
             return;
         }
         const body: PostModel = validation.value;
-
+        const service = ServiceLocator.addPostService;
+        try{
+            await service.addCategory(body);
+        }catch(err){
+            const errorRes = errorResponse(err);
+            res.status(errorRes.code).send(errorRes.message);
+        }
     }
 
 }
