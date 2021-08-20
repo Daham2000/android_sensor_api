@@ -3,6 +3,7 @@ import Joi = require("joi");
 import PostModel from "../../models/postModel";
 import ServiceLocator from "../../utill/serviceLocator";
 import {errorResponse} from "../../utill/response";
+import DataModel from "../../models/dataModel";
 
 export default class PostHandler {
 
@@ -30,9 +31,19 @@ export default class PostHandler {
     }
 
     public static async getAllPosts(req: Request, res: Response): Promise<void> {
+        const schema = Joi.object({
+            page: Joi.number().default(1),
+            limit: Joi.number().default(10),
+        });
+        const validation = schema.validate(req.query);
+        if (validation.error) {
+            res.status(401).send(validation.error);
+            return;
+        }
+        const filterData: DataModel = validation.value;
         const service = ServiceLocator.getPostsService;
         try {
-            const result = await service.getPosts();
+            const result = await service.getPosts(filterData);
             res.status(201).send({result});
         } catch (err) {
             const errorRes = errorResponse(err);
