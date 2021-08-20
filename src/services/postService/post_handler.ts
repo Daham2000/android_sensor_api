@@ -40,4 +40,24 @@ export default class PostHandler {
         }
     }
 
+    public static async updatePost(req:Request,res:Response): Promise<void> {
+        const idSchema = Joi.object({
+            id: Joi.string().required(),
+        });
+        const idValidation = idSchema.validate(req.params);
+        if (idValidation.error) {
+            res.status(401).send(idValidation.error);
+            return;
+        }
+        const postId = idValidation.value.id;
+        const service = ServiceLocator.updatePostService;
+        try {
+            await service.updatePost(postId,req.body);
+            res.status(201).send({success: true});
+        } catch (err) {
+            const errorRes = errorResponse(err);
+            res.status(errorRes.code).send(errorRes.message);
+        }
+    }
+
 }

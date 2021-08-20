@@ -15,4 +15,8 @@ export default class PostDao extends Dao {
         return this.model.find();
     }
 
+    public async updatePost(id:string,post: PostModel): Promise<PostDocument[]> {
+        return this.model.findByIdAndUpdate(id,post);
+    }
+
 }
