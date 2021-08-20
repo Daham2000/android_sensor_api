@@ -21,15 +21,10 @@ export default abstract class Dao {
     }
 
     async find(
-        sortBy: string,
-        desc: number,
-        skip: number,
-        limit: number,
-        filter: Record<string, unknown>
+        page: number,
+        limit: number
     ): Promise<any[]> {
-        const items = this.model.find(filter).sort({[sortBy]: desc});
-
-        return limit > 0 ? items.skip(skip - 1).limit(limit) : items.skip(0);
+        return this.model.find().skip((page-1)*limit).limit(limit);
     }
 
     async findOne(ref: string): Promise<any> {

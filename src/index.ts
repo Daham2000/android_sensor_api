@@ -4,7 +4,7 @@ import apiRouter from "./routes/api_router/api_router";
 
 const app = express();
 
-const PORT =process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json());

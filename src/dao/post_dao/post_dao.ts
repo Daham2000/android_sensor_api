@@ -14,7 +14,7 @@ export default class PostDao extends Dao {
 
     public async getAllPosts(filterData: DataModel,
     ): Promise<PostDocument[]> {
-        return this.model.find().skip((filterData.page-1)*filterData.limit).limit(filterData.limit);
+        return super.find(filterData.page,filterData.limit);
     }
 
     public async updatePost(id: string, post: PostModel): Promise<PostDocument[]> {
