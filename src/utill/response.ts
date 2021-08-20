@@ -2,7 +2,6 @@ import {ErrorResponse} from "../errors/errorResponce";
 import {SystemError} from "../errors/systemError";
 
 const ID_EXISTS = "ID already exist.";
-const USER_VALIDATION_FAILED = "User validation failed";
 const VALIDATION_FAILED = "Validation failed";
 const INVALID_UID = "uid is not valid";
 
@@ -20,12 +19,6 @@ export const errorResponse = (error: any): ErrorResponse => {
         errResponse = ErrorResponse.voidError(
             ID_EXISTS,
             409,
-            error.toString()
-        );
-    } else if (error.message === USER_VALIDATION_FAILED) {
-        errResponse = ErrorResponse.voidError(
-            error.message,
-            422,
             error.toString()
         );
     } else if (error.message === VALIDATION_FAILED) {

@@ -22,9 +22,6 @@ export class ErrorResponse {
     );
   }
 
-  static notAuth(description?: string) {
-    return new ErrorResponse("User not authorized", 1, description);
-  }
 
   static notEnoughParams(description?: string) {
     return new ErrorResponse(
