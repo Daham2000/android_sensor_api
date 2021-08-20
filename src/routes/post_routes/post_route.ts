@@ -9,4 +9,6 @@ postRoute.route("/").get(PostHandler.getAllPosts);
 
 postRoute.route("/:id").patch(PostHandler.updatePost);
 
+postRoute.route("/:id").delete(PostHandler.deletePost);
+
 export default postRoute;

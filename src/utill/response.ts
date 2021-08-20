@@ -1,13 +1,10 @@
-import { ErrorResponse } from "../errors/errorResponce";
-import { SystemError } from "../errors/systemError";
+import {ErrorResponse} from "../errors/errorResponce";
+import {SystemError} from "../errors/systemError";
 
 const ID_EXISTS = "ID already exist.";
 const USER_VALIDATION_FAILED = "User validation failed";
 const VALIDATION_FAILED = "Validation failed";
 const INVALID_UID = "uid is not valid";
-const INSUFFICIENT_QUANTITY = "Insufficient Item Count";
-const ARCHIVED_ITEM = "Cannot access archived items";
-const NO_USER = "User Does Not Exist";
 
 export const errorResponse = (error: any): ErrorResponse => {
     let errResponse: ErrorResponse;
@@ -42,24 +39,6 @@ export const errorResponse = (error: any): ErrorResponse => {
             INVALID_UID,
             422,
             error.reason.toString()
-        );
-    } else if (error.message === INSUFFICIENT_QUANTITY) {
-        errResponse = ErrorResponse.voidError(
-            error.message,
-            400,
-            error.toString()
-        );
-    } else if (error.message === ARCHIVED_ITEM) {
-        errResponse = ErrorResponse.voidError(
-            error.message,
-            400,
-            error.toString()
-        );
-    } else if (error.message === NO_USER) {
-        errResponse = ErrorResponse.voidError(
-            error.message,
-            400,
-            error.toString()
         );
     } else {
         console.log(error.message);

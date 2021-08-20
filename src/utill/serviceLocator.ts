@@ -46,5 +46,16 @@ export default class ServiceLocator {
         return this.instances.get(key);
     }
 
+    static get deletePostService(): AddPostService {
+        const key = "delete_post_service";
+        if (!this.instances.get(key)) {
+            this.instances.set(
+                key,
+                new AddPostService(this.postDao)
+            );
+        }
+        return this.instances.get(key);
+    }
+
 
 }

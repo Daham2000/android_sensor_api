@@ -19,4 +19,8 @@ export default class PostService {
     async updatePost(id: string, post: PostModel): Promise<PostDocument[]> {
         return this.postDAO.updatePost(id, post);
     }
+
+    async deletePost(id:string):Promise<PostDocument[]> {
+        return this.postDAO.deletePost(id);
+    }
 }

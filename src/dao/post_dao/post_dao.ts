@@ -19,4 +19,8 @@ export default class PostDao extends Dao {
         return this.model.findByIdAndUpdate(id,post);
     }
 
+    public async deletePost(id:string):Promise<PostDocument[]>{
+        return this.model.findByIdAndDelete(id);
+    }
+
 }
