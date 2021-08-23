@@ -3,16 +3,10 @@ import Mongoose = require("mongoose");
 export default class DBConnection {
     private static db: Mongoose.Connection;
 
-    private static uri2 =
-        "mongodb+srv://DahamNew:eH7UufrDaygCOTye@cluster0.0btvp.mongodb.net/AndroidSensor?retryWrites=true&w=majority";
-
-    private static uri =
-        "mongodb://127.0.0.1:27017/AndroidSensor?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false";
-
     static async connect(): Promise<Mongoose.Connection> {
         if (this.db !== undefined) return this.db;
 
-        await Mongoose.connect(this.uri, {
+        await Mongoose.connect(process.env.DB_CONNECTION_LOCAL, {
             useNewUrlParser: true,
             useFindAndModify: true,
             useUnifiedTopology: true,
